@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.5.xsd">
+
+	<bean class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+		<property name="location" value="classpath:codegenerate.properties" />
+	</bean>
+
+	<bean class="org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor" />
+
+	<bean id="jdbcConnection" class="com.wangjubao.dolphin.codegenerate.JdbcConnection" init-method="init" destroy-method="destroy">
+		<property name="url" value="${jdbc.url}" />
+		<property name="user" value="${jdbc.username}" />
+		<property name="password" value="${jdbc.password}" />
+		<property name="driverClass" value="${jdbc.driverClassName}" />
+	</bean>
+
+	<bean id="writeFile" class="com.wangjubao.dolphin.codegenerate.WriteFile" />
+
+	<bean id="modelCreator" class="com.wangjubao.dolphin.codegenerate.ModelCreator">
+		<property name="modelPackage" value="${modelPackage}" />
+	</bean>
+
+	<bean id="daoCreator" class="com.wangjubao.dolphin.codegenerate.DaoCreator">
+		<property name="modelPackage" value="${modelPackage}" />
+		<property name="daoPackage" value="${daoPackage}" />
+		<property name="pageListPackage" value="${pageListPackage}" />
+		<property name="pageListClassName" value="${pageListClassName}" />
+		<property name="pageQueryPackage" value="${pageQueryPackage}" />
+		<property name="pageQueryClassName" value="${pageQueryClassName}" />
+		<property name="integerPackage" value="${integerPackage}" />
+		<property name="integerClassName" value="${integerClassName}" />
+	</bean>
+
+	<bean id="daoImplCreator" class="com.wangjubao.dolphin.codegenerate.DaoImplCreator">
+		<property name="modelPackage" value="${modelPackage}" />
+		<property name="daoPackage" value="${daoPackage}" />
+		<property name="pageListPackage" value="${pageListPackage}" />
+		<property name="pageListClassName" value="${pageListClassName}" />
+		<property name="pageQueryPackage" value="${pageQueryPackage}" />
+		<property name="pageQueryClassName" value="${pageQueryClassName}" />
+		<property name="searchMapClassName" value="${searchMapClassName}" />
+		<property name="integerPackage" value="${integerPackage}" />
+		<property name="integerClassName" value="${integerClassName}" />
+		<property name="utilPackage" value="${utilPackage}" />
+		<property name="listClassName" value="${listClassName}" />
+		<property name="collClassName" value="${collClassName}" />
+		<property name="paginatorPackage" value="${paginatorPackage}" />
+		<property name="paginatorClassName" value="${paginatorClassName}" />
+	</bean>
+
+	<bean id="sqlmapCreator" class="com.wangjubao.dolphin.codegenerate.SqlmapCreator">
+		<property name="modelPackage" value="${modelPackage}" />
+		<property name="daoPackage" value="${daoPackage}" />
+	</bean>
+
+	<bean id="xmlFileCreator" class="com.wangjubao.dolphin.codegenerate.XmlFileCreator">
+		<property name="daoPackage" value="${daoPackage}" />
+	</bean>
+
+	<bean id="testCaseFileCreator" class="com.wangjubao.dolphin.codegenerate.TestCaseFileCreator">
+		<property name="daoPackage" value="${daoPackage}" />
+		<property name="modelPackage" value="${modelPackage}" />
+	</bean>
+
+	<bean id="metaDataLocator" class="com.wangjubao.dolphin.codegenerate.MetaDataLocator" />
+
+	<bean id="codeMain" class="com.wangjubao.dolphin.codegenerate.CodeMain">
+		<property name="tables">
+			<list>
+				<value>spider_bank_card_location</value>
+			</list>
+		</property>
+		<property name="needXmlFile" value="${needXmlFile}" />
+		<property name="needModel" value="${needModel}" />
+		<property name="needDao" value="${needDao}" />
+		<property name="needDaoImpl" value="${needDaoImpl}" />
+		<property name="needSqlmap" value="${needSqlmap}" />
+		<property name="needTestCaseFile" value="${needTestCaseFile}" />
+	</bean>
+</beans>

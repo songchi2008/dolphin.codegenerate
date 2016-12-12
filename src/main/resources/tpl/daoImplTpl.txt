@@ -1,0 +1,62 @@
+package com.mljr.spider.dao.impl;
+
+import java.util.Collections;
+import java.util.List;
+
+import org.springframework.stereotype.Repository;
+
+import com.mljr.spider.dao.${daoClassName};
+import com.mljr.spider.model.${modelClassName};
+
+import common.page.util.PageList;
+import common.page.util.PageQuery;
+import common.page.util.Paginator;
+import common.search.util.SearchMap;
+
+@Repository("${lowerDaoClassName}")
+public class ${daoImplClassName} extends AbstractBasicDao implements ${daoClassName} {
+
+    @Override
+    public ${modelClassName} load( ${pkClassType} ${pkName}) {
+         SearchMap map =  new SearchMap();
+         map.add( "${pkName}",${pkName});
+        return (${modelClassName}) getSqlSessionTemplate().selectOne("Mapper.${tableName}.load" , map);
+    }
+
+    @Override
+    public boolean delete(${pkClassType} ${pkName}) {
+         SearchMap map =  new SearchMap();
+         map.add( "${pkName}",${pkName});
+        return getSqlSessionTemplate().delete("Mapper.${tableName}.delete", map) > 0;
+    }
+
+    @Override
+    public ${modelClassName} create(${modelClassName} record) {
+         getSqlSessionTemplate().insert("Mapper.${tableName}.create" , record);
+        return record;
+    }
+
+    @Override
+    public boolean update(${modelClassName} record) {
+        return getSqlSessionTemplate().update("Mapper.${tableName}.update", record) > 0;
+    }
+
+    @Override
+    public PageList<${modelClassName}>  listByPage(PageQuery pageQuery, Integer count){
+         SearchMap map =  new SearchMap();
+         map.add("startIndex",pageQuery.getStartIndex());
+         map.add("pageSize", pageQuery.getPageSize());
+         if( count == null || count.intValue() == 0 ) {
+             count = (Integer)getSqlSessionTemplate().selectOne("Mapper.${tableName}.listByPageCount",map);
+         }
+         List<${modelClassName}>  list = Collections.emptyList();
+         if( count != null && count.intValue() > 0 ) {
+             list = getSqlSessionTemplate().selectList("Mapper.${tableName}.listByPage",map);
+          }
+         Paginator paginator =  new Paginator(pageQuery.getPageSize(), count == null ? 0 : count);
+         paginator.setPage(pageQuery.getPageNum());
+         PageList<${modelClassName}> result =  new PageList<${modelClassName}>(list);
+         result.setPaginator(paginator);
+         return result;
+     }
+}
