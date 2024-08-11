@@ -1,0 +1,20 @@
+{
+  "manifest_version": 3,
+  "name": "上下班打卡提醒",
+  "version": "1.0",
+  "description": "提醒你打卡的 Chrome 插件。",
+  "permissions": [
+    "storage",
+    "alarms",
+    "notifications"
+  ],
+  "background": {
+    "service_worker": "background.js"
+  },
+  "action": {
+    "default_popup": "popup.html"
+  },
+  "icons": {
+    "48": "icon.png"
+  }
+}

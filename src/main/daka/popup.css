@@ -1,0 +1,62 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    width: 400px;
+    height: 300px;
+  }
+  
+  .container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+    box-sizing: border-box;
+  }
+  
+  h1 {
+    font-size: 22px;
+    margin-bottom: 20px;
+    color: #333;
+  }
+  
+  .input-group {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 20px;
+    width: 100%;
+  }
+  
+  label {
+    margin-bottom: 8px;
+    font-weight: bold;
+    font-size: 16px;
+    color: #555;
+  }
+  
+  input[type="time"] {
+    padding: 10px;
+    font-size: 16px;
+    width: 100%; /* Ensure the input takes full width of the container */
+    max-width: 350px; /* Optional: restricts maximum width */
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    margin-bottom: 10px; /* Space below each input field */
+    box-sizing: border-box; /* Ensure padding and border are included in the width */
+  }
+  
+  button {
+    padding: 12px 24px;
+    font-size: 16px;
+    color: #fff;
+    background-color: #007bff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  button:hover {
+    background-color: #0056b3;
+  }
+  
