@@ -39,7 +39,7 @@ chrome.alarms.onAlarm.addListener((alarm) => {
     type: 'basic',
     iconUrl: 'icon.png',
     title: '打卡提醒',
-    message: `该打卡了！时间: ${alarm.name}`
+    message: `该打卡了！`
   });
 });
 
